@@ -23,6 +23,11 @@ fun main() {
 
     val array = intArrayOf(-2, 16, -35, 20, 0)
     array.indexOfMax(array)
+
+    val text1 = "Example text for testing method"
+    val text2 = "This method use for text"
+    val countWords = text1.coincidence(text1, text2)
+    println("Coincidence - $countWords")
 }
 
 //задание 2a
@@ -114,4 +119,16 @@ fun IntArray.indexOfMax(a: IntArray): Int? {
         println("Array is empty")
         return null
     }
+}
+
+//задание 2f
+
+fun String.coincidence(text: String, text2: String): Int {
+    var count = 0
+    for (n in text.split(" ")) {
+        for (m in text2.split(" ")) {
+            if (n == m) count++
+        }
+    }
+    return count
 }
