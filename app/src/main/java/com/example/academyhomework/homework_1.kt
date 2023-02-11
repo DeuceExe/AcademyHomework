@@ -1,5 +1,8 @@
 package com.example.academyhomework
 
+//задание 1d
+const val constanta = 5
+
 fun main() {
 
     //задание 1а
