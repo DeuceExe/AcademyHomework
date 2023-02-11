@@ -12,11 +12,11 @@ fun main() {
 
     val message = "123"
     val result = parseText(message)
-    println(result)
+    println("Parse $message(string) to Int: $result")
 
     //задание 7c
     val expression = try {
-        Integer.parseInt(message)
+        Integer.parseInt("Village")
     } catch (e: NumberFormatException) {
         null
     }
