@@ -32,7 +32,7 @@ fun checkAge(age: Int): Int {
     return age
 }
 
-//задание 7b
+//задание 7b,d,f
 
 fun parseText(text: String): Int? {
     return try {
