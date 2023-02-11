@@ -83,5 +83,5 @@ fun test() {
         in 19..21 -> test["Grade"] = 2
         else -> test["Grade"] = 1
     }
-    println(test)
+    test.forEach { println(it) }
 }
