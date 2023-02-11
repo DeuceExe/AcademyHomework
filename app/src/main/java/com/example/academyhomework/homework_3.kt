@@ -8,6 +8,7 @@ fun main() {
     println(factorial2(4))
 
     isPrime(7)
+    calculationPrime()
 }
 
 //задание 3a
@@ -36,4 +37,22 @@ fun isPrime(n: Int): Boolean {
     }
     println("$n is a prime number")
     return true
+}
+
+fun calculationPrime() {
+    var counter = 0
+    val primeList = mutableListOf<Int>()
+    val primeArray = arrayListOf<Int>()
+
+    for (n in 2..10000) {
+        isPrime(n)
+        if (isPrime(n).and(true)) {
+            if (primeList.size != 20) primeList.add(0, n)
+            if (primeList.size == 20 && primeArray.size != 10) primeArray.add(0, n)
+            counter++
+        }
+    }
+    println("First 20 numbers in list $primeList")
+    println("Next 10 numbers in array $primeArray")
+    println("Prime numbers in range 2..10000 - $counter")
 }
