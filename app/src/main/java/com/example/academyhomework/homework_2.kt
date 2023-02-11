@@ -1,5 +1,7 @@
 package com.example.academyhomework
 
+import kotlin.math.max
+
 fun main() {
 
     sum(1.1, 22.5, 6.3, -20.6)
@@ -18,6 +20,9 @@ fun main() {
     doOperation(20, 200, '-')
     doOperation(15, 5, '*')
     doOperation(49, 7, '/')
+
+    val array = intArrayOf(-2, 16, -35, 20, 0)
+    array.indexOfMax(array)
 }
 
 //задание 2a
@@ -86,4 +91,27 @@ fun doOperation(a: Int, b: Int, operation: Char): Double {
     }
     println("$a $operation $b = $result")
     return result
+}
+
+//задание 2e
+
+fun IntArray.indexOfMax(a: IntArray): Int? {
+    var maxValue = 0
+    return if (a.isNotEmpty()) {
+        var count = 0
+        maxValue = a.fold(Int.MIN_VALUE) { acc, i -> max(acc, i) }
+        a.forEach {
+            if (it == maxValue) count++
+        }
+        if (count <= 1) {
+            println("max value index - ${a.indexOf(maxValue)}")
+            a.indexOf(maxValue)
+        } else {
+            println("More than 1 values")
+            return null
+        }
+    } else {
+        println("Array is empty")
+        return null
+    }
 }
