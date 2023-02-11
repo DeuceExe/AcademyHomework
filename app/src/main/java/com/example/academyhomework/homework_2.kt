@@ -9,6 +9,10 @@ fun main() {
     print("Password: ")
     val password = readln()
     isValid(login, password)
+
+    print("Date(dd.mm.yyyy): ")
+    val date = readln()
+    checkDate(date)
 }
 
 //задание 2a
@@ -39,6 +43,27 @@ fun isValid(login: String, password: String) {
         println("Correct data")
     } else {
         println("Incorrect data")
+        return
+    }
+}
+
+//задание 2c
+
+enum class Holidays(val date: String) {
+    NEWYEAR("01.01.2023"),
+    CHRISTMAS("07.01.2023"),
+    VICTORYDAY("09.05.2023")
+}
+
+fun checkDate(day: String) {
+    println()
+    if (day.isNotEmpty()) {
+        when (day) {
+            Holidays.NEWYEAR.date, Holidays.VICTORYDAY.date, Holidays.CHRISTMAS.date -> println("Holiday")
+            else -> println("Weekday")
+        }
+    } else {
+        println("Incorrect date")
         return
     }
 }
