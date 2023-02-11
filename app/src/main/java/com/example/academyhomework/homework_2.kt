@@ -13,6 +13,11 @@ fun main() {
     print("Date(dd.mm.yyyy): ")
     val date = readln()
     checkDate(date)
+
+    doOperation(41, 13, '+')
+    doOperation(20, 200, '-')
+    doOperation(15, 5, '*')
+    doOperation(49, 7, '/')
 }
 
 //задание 2a
@@ -66,4 +71,19 @@ fun checkDate(day: String) {
         println("Incorrect date")
         return
     }
+}
+
+//задание 2d
+
+fun doOperation(a: Int, b: Int, operation: Char): Double {
+    var result = 0.0
+    when (operation) {
+        '+' -> result = a.plus(b).toDouble()
+        '-' -> result = a.minus(b).toDouble()
+        '*' -> result = a.times(b).toDouble()
+        '/' -> result = a.div(b).toDouble()
+        else -> println("Incorrect operation")
+    }
+    println("$a $operation $b = $result")
+    return result
 }
