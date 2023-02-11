@@ -14,6 +14,14 @@ fun main() {
     val result = parseText(message)
     println(result)
 
+    //задание 7c
+    val expression = try {
+        Integer.parseInt(message)
+    } catch (e: NumberFormatException) {
+        null
+    }
+    println(expression)
+
 }
 
 //задание 7a
