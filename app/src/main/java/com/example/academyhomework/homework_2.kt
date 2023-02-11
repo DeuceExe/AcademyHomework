@@ -41,5 +41,4 @@ fun isValid(login: String, password: String) {
         println("Incorrect data")
         return
     }
-
 }
