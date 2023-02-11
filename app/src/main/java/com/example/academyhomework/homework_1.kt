@@ -16,4 +16,8 @@ fun main() {
     val byteNumber: Byte = 41
     val intNumber = byteNumber.toInt()
     val textValue = intNumber.toString()
+
+    //задание 1c
+
+    println("Задание 1c \nValues: Byte - $byteNumber, Int - $intNumber, String - $textValue")
 }
