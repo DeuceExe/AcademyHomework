@@ -23,4 +23,9 @@ fun main() {
     //задание 1c
 
     println("Задание 1c \nValues: Byte - $byteNumber, Int - $intNumber, String - $textValue")
+
+    //задание 1e
+
+    print("Input number: ")
+    val inputNumber: Int = readln().toInt()
 }
