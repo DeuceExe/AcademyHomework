@@ -1,6 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editName"
+        style="@style/EditTextNameStyle"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:maxLength="35"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editSurname"
+        style="@style/EditTextNameStyle"
+        android:hint="@string/surname"
+        android:inputType="textPersonName"
+        android:maxLength="35"
+        app:layout_constraintEnd_toEndOf="@id/editName"
+        app:layout_constraintStart_toStartOf="@id/editName"
+        app:layout_constraintTop_toBottomOf="@id/editName" />
+
+    <EditText
+        android:id="@+id/editPhone"
+        style="@style/EditTextGeneralStyle"
+        android:hint="@string/phone"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="@id/editSurname"
+        app:layout_constraintStart_toStartOf="@id/editSurname"
+        app:layout_constraintTop_toBottomOf="@id/editSurname" />
+
+    <EditText
+        android:id="@+id/editAge"
+        style="@style/EditTextGeneralStyle"
+        android:hint="@string/age"
+        android:inputType="number"
+        android:maxLength="2"
+        app:layout_constraintEnd_toEndOf="@id/editPhone"
+        app:layout_constraintStart_toStartOf="@id/editPhone"
+        app:layout_constraintTop_toBottomOf="@id/editPhone" />
+
+    <Button
+        android:id="@+id/button1"
+        style="@style/ButtonGeneralStyle"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="210dp"
+        android:text="@string/write"
+        app:layout_constraintEnd_toStartOf="@id/button2"
+        app:layout_constraintStart_toStartOf="@id/editAge"
+        app:layout_constraintTop_toBottomOf="@id/editAge" />
+
+    <Button
+        android:id="@+id/button2"
+        style="@style/ButtonGeneralStyle"
+        android:layout_marginStart="210dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/clear"
+        app:layout_constraintEnd_toEndOf="@id/editAge"
+        app:layout_constraintStart_toEndOf="@id/button1"
+        app:layout_constraintTop_toBottomOf="@id/editAge" />
+
+    <TextView
+        android:id="@+id/nameTxt"
+        style="@style/TextViewStyle"
+        android:text="@string/nameTxt"
+        app:layout_constraintStart_toStartOf="@id/button1"
+        app:layout_constraintTop_toBottomOf="@id/button1" />
+
+    <TextView
+        android:id="@+id/surnameTxt"
+        style="@style/TextViewStyle"
+        android:text="@string/surnameTxt"
+        app:layout_constraintStart_toStartOf="@id/nameTxt"
+        app:layout_constraintTop_toBottomOf="@id/nameTxt" />
+
+    <TextView
+        android:id="@+id/phoneTxt"
+        style="@style/TextViewStyle"
+        android:text="@string/phoneTxt"
+        app:layout_constraintStart_toStartOf="@id/surnameTxt"
+        app:layout_constraintTop_toBottomOf="@id/surnameTxt" />
+
+    <TextView
+        android:id="@+id/ageTxt"
+        style="@style/TextViewStyle"
+        android:text="@string/ageTxt"
+        app:layout_constraintStart_toStartOf="@id/phoneTxt"
+        app:layout_constraintTop_toBottomOf="@id/phoneTxt" />
+
+    <TextView
+        android:id="@+id/nameValue"
+        style="@style/TextViewStyle"
+        android:layout_marginStart="155dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button1" />
+
+    <TextView
+        android:id="@+id/surnameValue"
+        style="@style/TextViewStyle"
+        android:layout_marginStart="155dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameValue" />
+
+    <TextView
+        android:id="@+id/phoneValue"
+        style="@style/TextViewStyle"
+        android:layout_marginStart="155dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/surnameValue" />
+
+    <TextView
+        android:id="@+id/ageValue"
+        style="@style/TextViewStyle"
+        android:layout_marginStart="155dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/phoneValue" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

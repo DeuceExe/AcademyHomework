@@ -6,4 +6,10 @@
     <string name="age">age</string>
     <string name="btn1">BTN1</string>
     <string name="showText">%1$s %2$s, %3$d years old</string>
+    <string name="write">WRITE</string>
+    <string name="clear">Clear</string>
+    <string name="nameTxt">Name</string>
+    <string name="surnameTxt">Surname</string>
+    <string name="phoneTxt">Phone</string>
+    <string name="ageTxt">Age</string>
 </resources>
