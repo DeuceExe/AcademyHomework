@@ -7,11 +7,11 @@ import android.widget.Button
 import android.widget.EditText
 
 class CustomTextWatcher(edList: Array<EditText>, bttn: Button) : TextWatcher {
-    var view: View
+    var button1: View
     var edList: Array<EditText>
 
     init {
-        this.view = bttn
+        this.button1 = bttn
         this.edList = edList
     }
 
@@ -21,9 +21,9 @@ class CustomTextWatcher(edList: Array<EditText>, bttn: Button) : TextWatcher {
 
         for (editText in edList) {
             if (editText.text.toString().trim { it <= ' ' }.isEmpty()) {
-                view.isEnabled = false
+                button1.isEnabled = false
                 break
-            } else view.isEnabled = true
+            } else button1.isEnabled = true
         }
     }
 }

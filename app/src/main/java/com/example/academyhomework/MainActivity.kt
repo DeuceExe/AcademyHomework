@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
             binding.editPhone,
             binding.editAge
         )
+
         val textWatcher = CustomTextWatcher(fieldList, binding.button1)
         for (editText in fieldList) editText.addTextChangedListener(textWatcher)
 
