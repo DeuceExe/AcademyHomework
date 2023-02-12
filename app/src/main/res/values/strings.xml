@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AcademyHomework</string>
+    <string name="name">name</string>
+    <string name="surname">surname</string>
+    <string name="phone">phone</string>
+    <string name="age">age</string>
+    <string name="btn1">BTN1</string>
+    <string name="showText">%1$s %2$s, %3$d years old</string>
 </resources>
