@@ -8,7 +8,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/kotlin_icon"
         android:label="Homework Task 3"
-        android:roundIcon="@drawable/kotlin_icon"
+        android:roundIcon="@drawable/bug"
         android:supportsRtl="true"
         android:theme="@style/MyMainStyle"
         tools:targetApi="31">
