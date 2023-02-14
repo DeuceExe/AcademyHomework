@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         val editSurname = findViewById<EditText>(R.id.editSurname)
         val editPhone = findViewById<EditText>(R.id.editPhone)
         val editAge = findViewById<EditText>(R.id.editAge)
-        val infoText = findViewById<TextView>(R.id.textView)
+        val infoText = findViewById<TextView>(R.id.infoText)
 
         button1.isEnabled = false
 
