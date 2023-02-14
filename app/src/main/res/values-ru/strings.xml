@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AcademyHomework</string>
+    <string name="name">Имя</string>
+    <string name="surname">Фамилия</string>
+    <string name="phone">Телефон</string>
+    <string name="age">Возраст</string>
+    <string name="btn1">Клик</string>
+    <string name="showText">%1$s %2$s, %3$d лет</string>
+    <string name="write">Написать</string>
+    <string name="clear">Очистить</string>
+    <string name="nameTxt">имя</string>
+    <string name="surnameTxt">фамилия</string>
+    <string name="phoneTxt">телефон</string>
+    <string name="ageTxt">возраст</string>
+</resources>
