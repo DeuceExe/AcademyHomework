@@ -16,4 +16,9 @@
     <string name="bold_text">Bold text</string>
     <string name="italic_text">Italic text</string>
     <string name="underlined_text"><u>Underlined text</u></string>
+    <string name="rounded">Rounded</string>
+    <string name="with_shadow">with shadow</string>
+    <string name="horizontal">horizontal</string>
+    <string name="vertical">vertical</string>
+    <string name="circle">circle</string>
 </resources>
