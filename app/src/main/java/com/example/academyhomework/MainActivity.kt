@@ -1,36 +1,39 @@
 package com.example.academyhomework
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.academyhomework.databinding.ActivityMainBinding
-
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        binding.button1.isEnabled = false
+        val button1 = findViewById<Button>(R.id.button1)
+        val editName = findViewById<EditText>(R.id.editName)
+        val editSurname = findViewById<EditText>(R.id.editSurname)
+        val editPhone = findViewById<EditText>(R.id.editPhone)
+        val editAge = findViewById<EditText>(R.id.editAge)
+        val infoText = findViewById<TextView>(R.id.textView)
+
+        button1.isEnabled = false
 
         val fieldList = arrayOf(
-            binding.editName,
-            binding.editSurname,
-            binding.editPhone,
-            binding.editAge
+            editName,
+            editSurname,
+            editPhone,
+            editAge
         )
 
-        val textWatcher = CustomTextWatcher(fieldList, binding.button1)
+        val textWatcher = CustomTextWatcher(fieldList, button1)
         for (editText in fieldList) editText.addTextChangedListener(textWatcher)
 
-        binding.apply {
-            button1.setOnClickListener {
-                val age = editAge.text.toString().toInt()
-                textView.text = getString(R.string.showText, editName.text, editSurname.text, age)
-            }
+        button1.setOnClickListener {
+            val age = editAge.text.toString().toInt()
+            infoText.text = getString(R.string.showText, editName.text, editSurname.text, age)
         }
     }
 }
