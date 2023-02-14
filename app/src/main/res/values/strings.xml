@@ -12,4 +12,8 @@
     <string name="surnameTxt">Surname</string>
     <string name="phoneTxt">Phone</string>
     <string name="ageTxt">Age</string>
+    <string name="mobile_operators">Mobile operators</string>
+    <string name="bold_text">Bold text</string>
+    <string name="italic_text">Italic text</string>
+    <string name="underlined_text"><u>Underlined text</u></string>
 </resources>
