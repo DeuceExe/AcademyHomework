@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AcademyHomework</string>
     <string name="name">name</string>
@@ -6,19 +7,10 @@
     <string name="age">age</string>
     <string name="btn1">Click</string>
     <string name="showText">%1$s %2$s, %3$d years old</string>
-    <string name="write">WRITE</string>
+    <string name="write">Write</string>
     <string name="clear">Clear</string>
     <string name="nameTxt">Name</string>
     <string name="surnameTxt">Surname</string>
     <string name="phoneTxt">Phone</string>
     <string name="ageTxt">Age</string>
-    <string name="mobile_operators">Mobile operators</string>
-    <string name="bold_text">Bold text</string>
-    <string name="italic_text">Italic text</string>
-    <string name="underlined_text"><u>Underlined text</u></string>
-    <string name="rounded">Rounded</string>
-    <string name="with_shadow">with shadow</string>
-    <string name="horizontal">horizontal</string>
-    <string name="vertical">vertical</string>
-    <string name="circle">circle</string>
 </resources>
