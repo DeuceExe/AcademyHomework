@@ -4,4 +4,10 @@
     <string name="to_main">To main</string>
     <string name="main_activity">Main Activity</string>
     <string name="second_activity">Second Activity</string>
+    <string name="name">name</string>
+    <string name="surname">surname</string>
+    <string name="phone">phone</string>
+    <string name="age">age</string>
+    <string name="btn1">Write</string>
+    <string name="showText">%1s %2s %3d</string>
 </resources>
