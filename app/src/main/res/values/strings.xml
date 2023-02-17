@@ -12,4 +12,7 @@
     <string name="showText">%1s %2s %3d</string>
     <string name="man">Man</string>
     <string name="woman">Woman</string>
+    <string name="email">Email</string>
+    <string name="birthday">Birthday</string>
+    <string name="third_activity">Third Activity</string>
 </resources>

@@ -22,13 +22,18 @@ class SecondActivity : AppCompatActivity() {
         val phone: Int = intent.getIntExtra(PHONE, 0)
         val age: Int = intent.getIntExtra(AGE, 0)
 
-        binding.button.setOnClickListener {
+        binding.btnMain.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             intent.putExtra(INFO, info)
             intent.putExtra(NAME, name)
             intent.putExtra(SURNAME, surname)
             intent.putExtra(PHONE, phone)
             intent.putExtra(AGE, age)
+            startActivity(intent)
+        }
+
+        binding.btnThird.setOnClickListener {
+            val intent = Intent(applicationContext, ThirdActivity::class.java)
             startActivity(intent)
         }
     }

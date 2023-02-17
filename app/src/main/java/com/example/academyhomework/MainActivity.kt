@@ -38,15 +38,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnSecondActivity.setOnClickListener {
-            val intent = Intent(applicationContext, SecondActivity::class.java)
-            if (checkEmptyField()) {
-                intent.putExtra(INFO, binding.infoText.text.toString())
-                intent.putExtra(NAME, binding.editName.text.toString())
-                intent.putExtra(SURNAME, binding.editSurname.text.toString())
-                intent.putExtra(PHONE, binding.editPhone.text.toString().toInt())
-                intent.putExtra(AGE, binding.editAge.text.toString().toInt())
-            }
-            startActivity(intent)
+            putIntent()
         }
 
         binding.btnWrite.setOnClickListener {
@@ -65,6 +57,18 @@ class MainActivity : AppCompatActivity() {
                     !editAge.text.isNullOrEmpty() &&
                     !infoText.text.isNullOrEmpty()
         }
+    }
+
+    private fun putIntent() {
+        val intent = Intent(applicationContext, SecondActivity::class.java)
+        if (checkEmptyField()) {
+            intent.putExtra(INFO, binding.infoText.text.toString())
+            intent.putExtra(NAME, binding.editName.text.toString())
+            intent.putExtra(SURNAME, binding.editSurname.text.toString())
+            intent.putExtra(PHONE, binding.editPhone.text.toString().toInt())
+            intent.putExtra(AGE, binding.editAge.text.toString().toInt())
+        }
+        startActivity(intent)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
