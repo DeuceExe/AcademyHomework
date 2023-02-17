@@ -19,8 +19,8 @@ class SecondActivity : AppCompatActivity() {
         val info: String? = intent.getStringExtra(INFO)
         val name: String? = intent.getStringExtra(NAME)
         val surname: String? = intent.getStringExtra(SURNAME)
-        val phone: Int? = intent.getStringExtra(PHONE)?.toInt()
-        val age: Int? = intent.getStringExtra(AGE)?.toInt()
+        val phone: Int = intent.getIntExtra(PHONE, 0)
+        val age: Int = intent.getIntExtra(AGE, 0)
 
         binding.button.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)

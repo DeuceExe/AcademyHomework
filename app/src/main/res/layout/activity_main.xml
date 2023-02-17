@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="@string/main_activity"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button2"
+        app:layout_constraintTop_toBottomOf="@id/btnSecondActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -70,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@id/editPhone" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnWrite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -85,12 +85,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@id/button1"
-        app:layout_constraintStart_toStartOf="@id/button1"
-        app:layout_constraintTop_toBottomOf="@id/button1" />
+        app:layout_constraintEnd_toEndOf="@id/btnWrite"
+        app:layout_constraintStart_toStartOf="@id/btnWrite"
+        app:layout_constraintTop_toBottomOf="@id/btnWrite" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnSecondActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/to_second"

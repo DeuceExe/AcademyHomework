@@ -25,30 +25,46 @@ class MainActivity : AppCompatActivity() {
         val info: String? = intent.getStringExtra(INFO)
         val name: String? = intent.getStringExtra(NAME)
         val surname: String? = intent.getStringExtra(SURNAME)
-        val phone: Int? = intent.getStringExtra(PHONE)?.toInt()
-        val age: Int? = intent.getStringExtra(AGE)?.toInt()
+        val phone: Int = intent.getIntExtra(PHONE, 0)
+        val age: Int = intent.getIntExtra(AGE, 0)
+
         binding.infoText.text = info
         binding.editName.setText(name)
         binding.editSurname.setText(surname)
-        binding.editPhone.setText(phone!!)
-        binding.editAge.setText(age!!)
+        //Чтобы при запуске не сетало 0
+        if (phone != 0 && age != 0) {
+            binding.editPhone.setText(phone.toString())
+            binding.editAge.setText(age.toString())
+        }
 
-        binding.button2.setOnClickListener {
+        binding.btnSecondActivity.setOnClickListener {
             val intent = Intent(applicationContext, SecondActivity::class.java)
-            intent.putExtra(INFO, binding.infoText.text.toString())
-            intent.putExtra(NAME, binding.editName.text.toString())
-            intent.putExtra(SURNAME, binding.editSurname.text.toString())
-            intent.putExtra(PHONE, binding.editPhone.text.toString())
-            intent.putExtra(AGE, binding.editAge.text.toString())
+            if (checkEmptyField()) {
+                intent.putExtra(INFO, binding.infoText.text.toString())
+                intent.putExtra(NAME, binding.editName.text.toString())
+                intent.putExtra(SURNAME, binding.editSurname.text.toString())
+                intent.putExtra(PHONE, binding.editPhone.text.toString().toInt())
+                intent.putExtra(AGE, binding.editAge.text.toString().toInt())
+            }
             startActivity(intent)
         }
 
-        binding.button1.setOnClickListener {
+        binding.btnWrite.setOnClickListener {
             val _age = binding.editAge.text.toString().toInt()
             binding.infoText.text =
                 getString(R.string.showText, binding.editName.text, binding.editSurname.text, _age)
         }
 
+    }
+
+    private fun checkEmptyField(): Boolean {
+        binding.apply {
+            return !editName.text.isNullOrEmpty() &&
+                    !editSurname.text.isNullOrEmpty() &&
+                    !editPhone.text.isNullOrEmpty() &&
+                    !editAge.text.isNullOrEmpty() &&
+                    !infoText.text.isNullOrEmpty()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
