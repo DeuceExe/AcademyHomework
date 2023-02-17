@@ -4,19 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.academyhomework.databinding.ActivityMainBinding
+import com.example.academyhomework.databinding.ActivitySecondBinding
 
-class MainActivity : AppCompatActivity() {
+class SecondActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivitySecondBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.d("life", "Create Main Activity")
+        Log.d("life", "Create Second Activity")
 
-        binding.button2.setOnClickListener {
+        binding.button.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
         }
@@ -24,27 +24,26 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Log.d("life", "Start Main Activity")
+        Log.d("life", "Start Second Activity")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("life", "Resume Main Activity")
+        Log.d("life", "Resume Second Activity")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d("life", "Pause Main Activity")
+        Log.d("life", "Pause Second Activity")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d("life", "Stop Main Activity")
+        Log.d("life", "Stop Second Activity")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("life", "Destroy Main Activity")
+        Log.d("life", "Destroy Second Activity")
     }
-
 }
