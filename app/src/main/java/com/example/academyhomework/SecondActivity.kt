@@ -2,12 +2,16 @@ package com.example.academyhomework
 
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.academyhomework.databinding.ActivitySecondBinding
+import java.util.*
+
 
 const val IS_MAN: String = "Is_man"
 const val BIRTHDAY: String = "Birthday"
@@ -15,8 +19,14 @@ const val EMAIL: String = "Email"
 
 class SecondActivity : AppCompatActivity() {
 
+    var mYear = 0
+    var mMonth: Int = 0
+    var mDay: Int = 0
+    var DIALOG_DATE = 1
+
     private lateinit var binding: ActivitySecondBinding
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySecondBinding.inflate(layoutInflater)
@@ -71,13 +81,29 @@ class SecondActivity : AppCompatActivity() {
         }
 
         binding.imageCalendar.setOnClickListener {
-            binding.calendar.visibility = View.VISIBLE
             binding.layout.setBackgroundColor(Color.GRAY)
-            binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-                binding.etBirthday.setText("$dayOfMonth.${month + 1}.$year")
-                binding.calendar.visibility = View.GONE
+            binding.datePicker.visibility = View.VISIBLE
+            binding.btnSetData.visibility = View.VISIBLE
+            datePickerDialog()
+            binding.btnSetData.setOnClickListener {
+                binding.datePicker.visibility = View.GONE
                 binding.layout.setBackgroundColor(Color.WHITE)
+                binding.btnSetData.visibility = View.GONE
             }
         }
+    }
+
+    private fun datePickerDialog() {
+        val picker = binding.datePicker
+        val today = Calendar.getInstance()
+        picker.init(
+            today.get(Calendar.YEAR),
+            today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH)
+        ) { view, year, month, day ->
+            val month = month + 1
+            binding.etBirthday.setText("$day/$month/$year")
+        }
+
     }
 }
