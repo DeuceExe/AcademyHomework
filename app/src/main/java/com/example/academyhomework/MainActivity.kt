@@ -22,6 +22,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         Log.d("life", "Create Main Activity")
 
+        binding.btnSecondActivity.isEnabled = false
+        binding.btnWrite.isEnabled = false
+
         val info: String? = intent.getStringExtra(INFO)
         val name: String? = intent.getStringExtra(NAME)
         val surname: String? = intent.getStringExtra(SURNAME)
@@ -45,7 +48,18 @@ class MainActivity : AppCompatActivity() {
             val _age = binding.editAge.text.toString().toInt()
             binding.infoText.text =
                 getString(R.string.showText, binding.editName.text, binding.editSurname.text, _age)
+            binding.btnSecondActivity.isEnabled = true
         }
+
+        val fieldList = arrayOf(
+            binding.editName,
+            binding.editSurname,
+            binding.editPhone,
+            binding.editAge
+        )
+
+        val textWatcher = CustomTextWatcher(fieldList, binding.btnWrite)
+        for (editText in fieldList) editText.addTextChangedListener(textWatcher)
 
     }
 

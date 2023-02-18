@@ -13,7 +13,6 @@ class ThirdActivity : AppCompatActivity() {
         binding = ActivityThirdBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val info: String? = intent.getStringExtra(INFO)
         val name: String? = intent.getStringExtra(NAME)
         val surname: String? = intent.getStringExtra(SURNAME)
         val phone: Int = intent.getIntExtra(PHONE, 0)
@@ -21,5 +20,16 @@ class ThirdActivity : AppCompatActivity() {
         val isMan: Boolean = intent.getBooleanExtra(IS_MAN, false)
         val birthday: String? = intent.getStringExtra(BIRTHDAY)
         val email: String? = intent.getStringExtra(EMAIL)
+
+        binding.apply {
+            tvNameValue.text = name
+            tvSurnameValue.text = surname
+            tvPhoneValue.text = phone.toString()
+            tvAgeValue.text = age.toString()
+            if (isMan) tvGenderValue.setText(R.string.man)
+            else tvGenderValue.setText(R.string.woman)
+            tvBirthdayValue.text = birthday
+            tvEmailValue.text = email
+        }
     }
 }

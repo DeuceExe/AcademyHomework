@@ -46,21 +46,19 @@ class SecondActivity : AppCompatActivity() {
 
             fun String.isValidEmail() =
                 !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
-            if (binding.etEmail.text.toString().isValidEmail()) startActivity(intent)
-            else {
+            if (binding.etEmail.text.toString().isValidEmail()) {
+                intent.putExtra(NAME, name)
+                intent.putExtra(SURNAME, surname)
+                intent.putExtra(PHONE, phone)
+                intent.putExtra(AGE, age)
+                intent.putExtra(IS_MAN, binding.radioMan.text.toString())
+                intent.putExtra(BIRTHDAY, binding.etBirthday.text.toString())
+                intent.putExtra(EMAIL, binding.etEmail.text.toString())
+                startActivity(intent)
+            } else {
                 val toast = Toast.makeText(applicationContext, "Incorrect email", Toast.LENGTH_LONG)
                 toast.show()
             }
-
-            intent.putExtra(INFO, info)
-            intent.putExtra(NAME, name)
-            intent.putExtra(SURNAME, surname)
-            intent.putExtra(PHONE, phone)
-            intent.putExtra(AGE, age)
-            intent.putExtra(IS_MAN, binding.radioMan.toString())
-            intent.putExtra(BIRTHDAY, binding.etBirthday.toString())
-            intent.putExtra(EMAIL, binding.etEmail.toString())
-            startActivity(intent)
         }
 
         binding.etBirthday.setOnClickListener {

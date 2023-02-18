@@ -16,4 +16,7 @@
     <string name="birthday">Birthday</string>
     <string name="third_activity">Third Activity</string>
     <string name="tv_third_activity">Third Activity</string>
+    <string name="gender">Gender</string>
+    <string name="tv_birthday">Birthday</string>
+    <string name="tv_email">Email</string>
 </resources>

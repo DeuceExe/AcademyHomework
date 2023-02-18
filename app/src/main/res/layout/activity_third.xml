@@ -12,4 +12,118 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="10dp">
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name" />
+
+            <TextView
+                android:id="@+id/tvNameValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tvSurname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/surname" />
+
+            <TextView
+                android:id="@+id/tvSurnameValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phone" />
+
+            <TextView
+                android:id="@+id/tvPhoneValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tvAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/age" />
+
+            <TextView
+                android:id="@+id/tvAgeValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tvGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender" />
+
+            <TextView
+                android:id="@+id/tvGenderValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tvBirthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_birthday" />
+
+            <TextView
+                android:id="@+id/tvBirthdayValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_email" />
+
+            <TextView
+                android:id="@+id/tvEmailValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp" />
+        </TableRow>
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
