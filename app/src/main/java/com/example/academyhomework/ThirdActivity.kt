@@ -4,11 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.academyhomework.databinding.ActivityThirdBinding
 
+
 class ThirdActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityThirdBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityThirdBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -20,6 +22,10 @@ class ThirdActivity : AppCompatActivity() {
         val isMan: Boolean = intent.getBooleanExtra(IS_MAN, false)
         val birthday: String? = intent.getStringExtra(BIRTHDAY)
         val email: String? = intent.getStringExtra(EMAIL)
+
+        if (isMan) {
+            binding.layout.setBackgroundResource(R.color.purple_700)
+        } else binding.layout.setBackgroundResource(R.color.pink)
 
         binding.apply {
             tvNameValue.text = name

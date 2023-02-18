@@ -47,13 +47,21 @@
 
     <EditText
         android:id="@+id/etBirthday"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:hint="@string/birthday"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/radioGender" />
+
+    <ImageView
+        android:id="@+id/imageCalendar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+        app:layout_constraintTop_toBottomOf="@id/radioGender"
+        app:layout_constraintStart_toEndOf="@id/etBirthday" />
 
     <LinearLayout
         android:id="@+id/linear"

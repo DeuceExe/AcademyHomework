@@ -122,5 +122,4 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         Log.d("life", "Destroy Main Activity")
     }
-
 }

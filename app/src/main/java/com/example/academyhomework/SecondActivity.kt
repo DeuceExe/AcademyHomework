@@ -30,6 +30,7 @@ class SecondActivity : AppCompatActivity() {
         val phone: Int = intent.getIntExtra(PHONE, 0)
         val age: Int = intent.getIntExtra(AGE, 0)
 
+        binding.etBirthday.isEnabled = false
 
         binding.btnMain.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
@@ -46,22 +47,32 @@ class SecondActivity : AppCompatActivity() {
 
             fun String.isValidEmail() =
                 !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
-            if (binding.etEmail.text.toString().isValidEmail()) {
+
+            if (binding.etEmail.text.toString()
+                    .isValidEmail() && (binding.radioMan.isChecked || binding.radioWoman.isChecked) &&
+                binding.etEmail.text.toString().trim { it <= ' ' }.isNotEmpty() &&
+                binding.etBirthday.text.toString().trim { it <= ' ' }.isNotEmpty()
+            ) {
                 intent.putExtra(NAME, name)
                 intent.putExtra(SURNAME, surname)
                 intent.putExtra(PHONE, phone)
                 intent.putExtra(AGE, age)
-                intent.putExtra(IS_MAN, binding.radioMan.text.toString())
+                if (binding.radioMan.isChecked) intent.putExtra(IS_MAN, true)
+                else intent.putExtra(IS_MAN, false)
                 intent.putExtra(BIRTHDAY, binding.etBirthday.text.toString())
                 intent.putExtra(EMAIL, binding.etEmail.text.toString())
                 startActivity(intent)
             } else {
-                val toast = Toast.makeText(applicationContext, "Incorrect email", Toast.LENGTH_LONG)
+                val toast = Toast.makeText(
+                    applicationContext,
+                    "Incorrect email or not all data entered",
+                    Toast.LENGTH_LONG
+                )
                 toast.show()
             }
         }
 
-        binding.etBirthday.setOnClickListener {
+        binding.imageCalendar.setOnClickListener {
             binding.calendar.visibility = View.VISIBLE
             binding.layout.setBackgroundColor(Color.GRAY)
             binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
@@ -70,32 +81,5 @@ class SecondActivity : AppCompatActivity() {
                 binding.layout.setBackgroundColor(Color.WHITE)
             }
         }
-
-    }
-
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("life", "Start Second Activity")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("life", "Resume Second Activity")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("life", "Pause Second Activity")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("life", "Stop Second Activity")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("life", "Destroy Second Activity")
     }
 }
