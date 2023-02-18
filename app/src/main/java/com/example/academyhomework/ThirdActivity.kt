@@ -84,8 +84,8 @@ class ThirdActivity : AppCompatActivity() {
     }
 
     private fun call() {
-        val dialIntent =
-            Intent(Intent.ACTION_CALL, Uri.parse("tel:" + binding.tvPhoneValue.text.toString()))
+        val dialIntent = Intent(Intent.ACTION_CALL)
+        dialIntent.data = Uri.parse("tel:" + binding.tvPhoneValue.text.toString())
         startActivity(dialIntent)
     }
 
