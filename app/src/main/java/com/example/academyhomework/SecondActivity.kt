@@ -3,7 +3,6 @@ package com.example.academyhomework
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
@@ -22,7 +21,6 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.d("life", "Create Second Activity")
 
         val info: String? = intent.getStringExtra(INFO)
         val name: String? = intent.getStringExtra(NAME)

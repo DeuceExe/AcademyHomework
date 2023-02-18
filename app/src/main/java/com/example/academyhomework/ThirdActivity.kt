@@ -1,7 +1,13 @@
 package com.example.academyhomework
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.academyhomework.databinding.ActivityThirdBinding
 
 
@@ -37,5 +43,50 @@ class ThirdActivity : AppCompatActivity() {
             tvBirthdayValue.text = birthday
             tvEmailValue.text = email
         }
+
+        binding.tvPhoneValue.setOnClickListener {
+            showCallApp()
+        }
+
+        binding.imageCall.setOnClickListener {
+            showCallApp()
+        }
+
+        binding.tvEmailValue.setOnClickListener {
+            writeEmail()
+        }
+    }
+
+    private fun showCallApp() {
+        if (ContextCompat.checkSelfPermission(
+                applicationContext,
+                Manifest.permission.CALL_PHONE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(Manifest.permission.CALL_PHONE), REQUEST_CODE
+            )
+        } else {
+            call()
+        }
+    }
+
+    private fun writeEmail() {
+        val emailIntent = Intent(Intent.ACTION_SENDTO)
+        emailIntent.data = Uri.parse("mailto:");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, binding.tvEmailValue.text.toString())
+
+        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+        finish();
+
+    }
+
+    private fun call() {
+        val dialIntent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "123456789"))
+        startActivity(dialIntent)
+    }
+
+    companion object {
+        const val REQUEST_CODE = 1
     }
 }
