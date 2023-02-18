@@ -55,6 +55,10 @@ class ThirdActivity : AppCompatActivity() {
         binding.tvEmailValue.setOnClickListener {
             writeEmail()
         }
+
+        binding.imageEmail.setOnClickListener {
+            writeEmail()
+        }
     }
 
     private fun showCallApp() {
@@ -73,16 +77,15 @@ class ThirdActivity : AppCompatActivity() {
 
     private fun writeEmail() {
         val emailIntent = Intent(Intent.ACTION_SENDTO)
-        emailIntent.data = Uri.parse("mailto:");
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, binding.tvEmailValue.text.toString())
+        emailIntent.data = Uri.parse("mailto:")
 
-        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-        finish();
-
+        startActivity(Intent.createChooser(emailIntent, "Send mail..."))
+        finish()
     }
 
     private fun call() {
-        val dialIntent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "123456789"))
+        val dialIntent =
+            Intent(Intent.ACTION_CALL, Uri.parse("tel:" + binding.tvPhoneValue.text.toString()))
         startActivity(dialIntent)
     }
 
