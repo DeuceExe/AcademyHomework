@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">AcademyHomework</string>
+    <string name="to_second">To second</string>
+    <string name="to_main">To main</string>
+    <string name="main_activity">Main Activity</string>
+    <string name="second_activity">Second Activity</string>
+    <string name="name">name</string>
+    <string name="surname">surname</string>
+    <string name="phone">phone</string>
+    <string name="age">age</string>
+    <string name="btn1">Write</string>
+    <string name="showText">%1s %2s %3d</string>
+    <string name="man">Man</string>
+    <string name="woman">Woman</string>
+    <string name="email">Email</string>
+    <string name="birthday">Birthday</string>
+    <string name="third_activity">Third Activity</string>
+    <string name="tv_third_activity">Third Activity</string>
+    <string name="gender">Gender</string>
+    <string name="tv_birthday">Birthday</string>
+    <string name="tv_email">Email</string>
+    <string name="done">Done</string>
 </resources>
