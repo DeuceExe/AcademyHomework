@@ -25,6 +25,13 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, TemporaryActivity::class.java)
             startActivity(intent)
         }
+
+        binding.btnSendData.setOnClickListener {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.frameLayout, FirstFragment.newInstance("Eva", 23, false))
+                .commit()
+        }
     }
 
     override fun onStart() {
