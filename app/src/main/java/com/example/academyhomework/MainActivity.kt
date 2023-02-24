@@ -26,10 +26,23 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(FirstFragment.newInstance("Eva", 25, false))
         }
 
-
         binding.btnTemporaryActivity.setOnClickListener {
             val intent = Intent(applicationContext, TemporaryActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btnThirdFragment.setOnClickListener {
+
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.secondFL, ThirdFragment())
+                .commit()
+        }
+        binding.btnFourthFragment.setOnClickListener {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.secondFL, FourthFragment())
+                .commit()
         }
     }
 

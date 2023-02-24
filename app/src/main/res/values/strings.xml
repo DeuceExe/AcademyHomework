@@ -8,4 +8,10 @@
     <string name="send_data">Send data</string>
     <string name="secondFragment">SecondFragment</string>
     <string name="set_data_in_fragment">set data in fragment</string>
+    <string name="first_fragment">First fragment</string>
+    <string name="second_fragment">Second fragment</string>
+    <string name="hello_third_fragment">Hello third fragment</string>
+    <string name="hello_fourth_fragment">Hello fourth fragment</string>
+    <string name="third_fragment">Third fragment</string>
+    <string name="fourth_fragment">Fourth Fragment</string>
 </resources>
