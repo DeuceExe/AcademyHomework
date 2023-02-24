@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">AcademyHomework</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello first fragment</string>
     <string name="main_activity">Main Activity</string>
     <string name="temporary_activity">Temporary Activity</string>
     <string name="to_temporary">To temporary</string>
     <string name="send_data">Send data</string>
+    <string name="secondFragment">SecondFragment</string>
+    <string name="set_data_in_fragment">set data in fragment</string>
 </resources>
