@@ -11,14 +11,16 @@ public class TemporaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temporary);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.flForFirstFragment, new BlankFragment())
-                .commit();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.flForFirstFragment, new BlankFragment())
+                    .commit();
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.flForSecFragment, new SecondBlankFragment())
-                .commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.flForSecFragment, new SecondBlankFragment())
+                    .commit();
+        }
     }
 }

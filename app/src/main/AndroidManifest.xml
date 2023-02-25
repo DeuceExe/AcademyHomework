@@ -15,7 +15,8 @@
         <activity
             android:name=".TemporaryActivity"
             android:exported="false">
-            <meta-data
+
+        <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>

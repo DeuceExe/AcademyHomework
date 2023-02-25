@@ -15,4 +15,8 @@
     <string name="third_fragment">Third fragment</string>
     <string name="fourth_fragment">Fourth Fragment</string>
     <string name="hello_second_fragment">Hello second fragment</string>
+    <string name="some_text">Some text</string>
+    <string name="to_sec_fragment">To sec fragment</string>
+    <string name="waiting_result">Waiting result</string>
+    <string name="create_fragments">Create fragments</string>
 </resources>
