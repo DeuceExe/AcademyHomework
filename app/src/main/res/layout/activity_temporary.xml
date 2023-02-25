@@ -7,11 +7,33 @@
     tools:context=".TemporaryActivity">
 
     <TextView
+        android:id="@+id/tvTemporaryActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/temporary_activity"
-        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="15dp"
+        android:text="@string/temporary_activity" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTemporaryActivity">
+
+
+        <FrameLayout
+            android:id="@+id/flForFirstFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flForSecFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></FrameLayout>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
