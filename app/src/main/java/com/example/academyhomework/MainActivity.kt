@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.secondFL, FourthFragment())
                 .commit()
         }
+
+
     }
 
     private fun replaceFragment(fragment: Fragment) {

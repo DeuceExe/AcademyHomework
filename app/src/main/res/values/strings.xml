@@ -14,4 +14,5 @@
     <string name="hello_fourth_fragment">Hello fourth fragment</string>
     <string name="third_fragment">Third fragment</string>
     <string name="fourth_fragment">Fourth Fragment</string>
+    <string name="hello_second_fragment">Hello second fragment</string>
 </resources>
