@@ -7,13 +7,14 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/kotlin_icon"
-        android:label="Homework Task 3"
+        android:label="Homework 6"
         android:roundIcon="@drawable/bug"
         android:supportsRtl="true"
         android:theme="@style/MyMainStyle"
         tools:targetApi="31">
+
         <activity
-            android:name=".SecondActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

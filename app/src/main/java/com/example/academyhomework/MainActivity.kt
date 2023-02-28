@@ -1,39 +1,63 @@
 package com.example.academyhomework
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.academyhomework.databinding.ActivityMainBinding
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.datepicker.MaterialDatePicker.INPUT_MODE_TEXT
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+    private var dataList = mutableListOf<Any>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val button1 = findViewById<Button>(R.id.button1)
-        val editName = findViewById<EditText>(R.id.editName)
-        val editSurname = findViewById<EditText>(R.id.editSurname)
-        val editPhone = findViewById<EditText>(R.id.editPhone)
-        val editAge = findViewById<EditText>(R.id.editAge)
-        val infoText = findViewById<TextView>(R.id.infoText)
+        with(binding) {
+            btnSetData.isEnabled = false
 
-        button1.isEnabled = false
+            val fieldList = arrayOf(
+                editName,
+                editSurname,
+                editPhone,
+                editAge,
+                editBirthday
+            )
 
-        val fieldList = arrayOf(
-            editName,
-            editSurname,
-            editPhone,
-            editAge
-        )
+            val textWatcher = CustomTextWatcher(fieldList, btnSetData)
+            for (editText in fieldList) editText.addTextChangedListener(textWatcher)
 
-        val textWatcher = CustomTextWatcher(fieldList, button1)
-        for (editText in fieldList) editText.addTextChangedListener(textWatcher)
+            btnSetData.setOnClickListener {
+                dataList.add(0, editName.text.toString())
+                dataList.add(1, editSurname.text.toString())
+                dataList.add(2, editAge.text.toString().toInt())
+                dataList.add(3, editPhone.text.toString())
+                dataList.add(4, editBirthday.text.toString())
+            }
 
-        button1.setOnClickListener {
-            val age = editAge.text.toString().toInt()
-            infoText.text = getString(R.string.showText, editName.text, editSurname.text, age)
+            editBirthday.setOnClickListener {
+                showDatePicker()
+            }
         }
+
     }
+
+    private fun showDatePicker() {
+
+        val materialDatePicker = MaterialDatePicker.Builder.datePicker()
+            .setInputMode(INPUT_MODE_TEXT)
+            .setTitleText("Select your date of birth")
+            .build()
+
+        materialDatePicker.addOnPositiveButtonClickListener {
+            binding.editBirthday.setText(materialDatePicker.headerText)
+            materialDatePicker.setMenuVisibility(true)
+        }
+
+        materialDatePicker.show(supportFragmentManager, "TAG")
+    }
+
 }

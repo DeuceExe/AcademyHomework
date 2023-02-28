@@ -5,12 +5,12 @@ import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
+import com.google.android.material.textfield.TextInputEditText
 
 
-class CustomTextWatcher(edList: Array<EditText>, bttn: Button) : TextWatcher {
+class CustomTextWatcher(edList: Array<TextInputEditText>, bttn: Button) : TextWatcher {
     var button1: View
-    var edList: Array<EditText>
+    var edList: Array<TextInputEditText>
 
     init {
         this.button1 = bttn
