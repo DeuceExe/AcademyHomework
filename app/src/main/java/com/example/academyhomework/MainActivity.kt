@@ -2,22 +2,33 @@ package com.example.academyhomework
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academyhomework.databinding.ActivityMainBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.datepicker.MaterialDatePicker.INPUT_MODE_TEXT
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var dataList = mutableListOf<Any>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val dataList: MutableList<DataList> = mutableListOf()
+
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerView.layoutManager = layoutManager
+        val fieldsAdapter = ListAdapter(dataList) {
+            dataList.removeAt(it)
+            dataList
+        }
+        binding.recyclerView.adapter = fieldsAdapter
+
         with(binding) {
-            btnSetData.isEnabled = false
 
             val fieldList = arrayOf(
                 editName,
@@ -31,33 +42,53 @@ class MainActivity : AppCompatActivity() {
             for (editText in fieldList) editText.addTextChangedListener(textWatcher)
 
             btnSetData.setOnClickListener {
-                dataList.add(0, editName.text.toString())
-                dataList.add(1, editSurname.text.toString())
-                dataList.add(2, editAge.text.toString().toInt())
-                dataList.add(3, editPhone.text.toString())
-                dataList.add(4, editBirthday.text.toString())
-            }
+                dataList.add(
+                    DataList(
+                        setImage(editAge.text.toString().toInt()),
+                        editName.text.toString(),
+                        editSurname.text.toString(),
+                        editPhone.text.toString(),
+                        editAge.text.toString().toInt(),
+                        editBirthday.text.toString()
+                    )
+                )
+                fieldsAdapter.notifyDataSetChanged()
 
+                /*editName.text?.clear()
+                editSurname.text?.clear()
+                editPhone.text?.clear()
+                editAge.text?.clear()
+                editBirthday.text?.clear()*/
+            }
             editBirthday.setOnClickListener {
                 showDatePicker()
             }
         }
+    }
 
+    private fun setImage(age: Int): Int {
+        val imageId: Int = when (age) {
+            in 0..10 -> R.drawable.ic_baby
+            in 11..20 -> R.drawable.ic_schoolboy
+            in 21..49 -> R.drawable.ic_man
+            else -> R.drawable.ic_elderly
+        }
+        return imageId
     }
 
     private fun showDatePicker() {
 
         val materialDatePicker = MaterialDatePicker.Builder.datePicker()
             .setInputMode(INPUT_MODE_TEXT)
-            .setTitleText("Select your date of birth")
+            .setTitleText(resources.getString(R.string.birth_date_hint))
             .build()
 
-        materialDatePicker.addOnPositiveButtonClickListener {
-            binding.editBirthday.setText(materialDatePicker.headerText)
-            materialDatePicker.setMenuVisibility(true)
-        }
-
         materialDatePicker.show(supportFragmentManager, "TAG")
-    }
 
+        materialDatePicker.addOnPositiveButtonClickListener {
+            val dateFormat = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
+            binding.editBirthday.setText(dateFormat.format(Date(it).time))
+        }
+    }
 }
+

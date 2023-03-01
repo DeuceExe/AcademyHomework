@@ -17,9 +17,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editName"
-            style="@style/MyEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="@string/name"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColorHint="#757575" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -57,7 +59,7 @@
         android:id="@+id/layoutPhone"
         style="@style/MyMainStyle"
         app:counterEnabled="true"
-        app:counterMaxLength="10"
+        app:counterMaxLength="12"
         app:layout_constraintEnd_toEndOf="@id/layoutAge"
         app:layout_constraintStart_toStartOf="@id/layoutAge"
         app:layout_constraintTop_toBottomOf="@id/layoutAge"
@@ -69,7 +71,7 @@
             style="@style/MyEditText"
             android:hint="@string/phone"
             android:inputType="phone"
-            android:maxLength="10" />
+            android:maxLength="12" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -86,19 +88,30 @@
             android:layout_height="wrap_content"
             android:focusable="false"
             android:hint="@string/birthday"
-            android:textSize="14dp" />
+            android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        style="@style/Widget.MaterialComponents.Button"
         android:id="@+id/btnSetData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
+        android:enabled="false"
         android:fontFamily="@font/anurati"
         android:text="@string/btn1"
         app:layout_constraintEnd_toEndOf="@id/layoutBirthday"
         app:layout_constraintStart_toStartOf="@id/layoutBirthday"
         app:layout_constraintTop_toBottomOf="@id/layoutBirthday" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSetData"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

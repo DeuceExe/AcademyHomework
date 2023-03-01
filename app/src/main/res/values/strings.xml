@@ -7,4 +7,6 @@
     <string name="btn1">Click</string>
     <string name="birthday">Birthday</string>
     <string name="required">*required</string>
+    <string name="birth_date_hint">Date of birth</string>
+    <string name="delete">Delete</string>
 </resources>
