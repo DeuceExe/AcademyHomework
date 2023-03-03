@@ -1,5 +1,9 @@
 package com.example.academyhomework
 
+import androidx.room.Entity
+import java.io.Serializable
+
+@Entity
 data class DataList(
     val imageId: Int,
     val name: String,
@@ -7,4 +11,4 @@ data class DataList(
     val phone: String,
     val age: Int,
     val birthday: String
-)
+) : Serializable

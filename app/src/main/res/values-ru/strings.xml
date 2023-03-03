@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">AcademyHomework</string>
-    <string name="name">Имя</string>
-    <string name="surname">Фамилия</string>
-    <string name="phone">Телефон</string>
-    <string name="age">Возраст</string>
-    <string name="btn1">Клик</string>
-</resources>

@@ -5,8 +5,13 @@
     <string name="surname">Last name</string>
     <string name="phone">Phone</string>
     <string name="age">Age</string>
-    <string name="btn1">Click</string>
+    <string name="btn1">Set data</string>
     <string name="birthday">Birthday</string>
     <string name="required">*required</string>
     <string name="birth_date_hint">Date of birth</string>
+    <string name="delete">Delete</string>
+    <string name="next_activity">Next Screen</string>
+    <string name="second_activity">Second Activity</string>
+    <string name="tvPhone">+%1$s</string>
+    <string name="tvAge">%s years</string>
 </resources>

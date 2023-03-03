@@ -1,11 +1,13 @@
 package com.example.academyhomework
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academyhomework.databinding.ActivityMainBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.datepicker.MaterialDatePicker.INPUT_MODE_TEXT
+import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,11 +20,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val dataList: MutableList<DataList> = mutableListOf()
+        val dataList = mutableListOf<DataList>()
+        val sentList = mutableListOf<DataList>()
 
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.layoutManager = layoutManager
         val fieldsAdapter = ListAdapter(dataList) {
+            sentList.addAll(dataList)
             dataList.removeAt(it)
             dataList
         }
@@ -54,14 +58,21 @@ class MainActivity : AppCompatActivity() {
                 )
                 fieldsAdapter.notifyDataSetChanged()
 
-                /*editName.text?.clear()
+                editName.text?.clear()
                 editSurname.text?.clear()
                 editPhone.text?.clear()
                 editAge.text?.clear()
-                editBirthday.text?.clear()*/
+                editBirthday.text?.clear()
+                btnSecondActivity.isEnabled = true
             }
             editBirthday.setOnClickListener {
                 showDatePicker()
+            }
+
+            btnSecondActivity.setOnClickListener {
+                val intent = Intent(this@MainActivity, SecondActivity::class.java)
+                intent.putExtra(DATA, dataList as Serializable)
+                startActivity(intent)
             }
         }
     }
@@ -90,5 +101,9 @@ class MainActivity : AppCompatActivity() {
             binding.editBirthday.setText(dateFormat.format(Date(it).time))
         }
     }
-}
 
+    companion object {
+
+        const val DATA = "Data"
+    }
+}

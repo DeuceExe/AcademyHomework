@@ -7,8 +7,9 @@ import com.example.academyhomework.databinding.ItemListAdapterBinding
 
 class ListAdapter(
     private var dataSet: MutableList<DataList>,
-    private val clickAction: (Int) -> MutableList<DataList>
-) :
+    private val clickAction: (Int) -> MutableList<DataList>,
+
+    ) :
     RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
     private lateinit var binding: ItemListAdapterBinding
@@ -21,6 +22,7 @@ class ListAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.bind(dataSet[position])
+
         binding.btnDeleteItem.setOnClickListener {
             updateList(clickAction.invoke(position))
         }
@@ -42,10 +44,42 @@ class ListAdapter(
                 imagePerson.setImageResource(item.imageId)
                 tvName.text = item.name
                 tvSurname.text = item.surname
-                tvPhone.text = item.phone
+                tvPhone.text = "+${item.phone}"
                 tvAge.text = "${item.age} years"
                 tvBirthday.text = item.birthday
             }
         }
     }
+
+    /*@GlideModule
+    class PaletteGlideModule : AppGlideModule()
+    fun determinationColors(){
+        GlideApp.with(this)
+            .asBitmap()
+            .load(url)
+            .listener(object : RequestListener<Bitmap> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Bitmap>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Bitmap?,
+                    model: Any?,
+                    target: Target<Bitmap>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    if (resource != null) {
+                        val palette: Palette = Palette.from(resource).generate()
+                        color = palette.darkMutedSwatch?.rgb ?: R.color.default
+                    }
+                    return false
+                }
+            }).into(binding.imagePerson)
+    }*/
 }

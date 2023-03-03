@@ -8,12 +8,12 @@ import android.widget.Button
 import com.google.android.material.textfield.TextInputEditText
 
 
-class CustomTextWatcher(edList: Array<TextInputEditText>, bttn: Button) : TextWatcher {
-    var button1: View
+class CustomTextWatcher(edList: Array<TextInputEditText>, btnSetData: Button) : TextWatcher {
+    var btnSetData: View
     var edList: Array<TextInputEditText>
 
     init {
-        this.button1 = bttn
+        this.btnSetData = btnSetData
         this.edList = edList
     }
 
@@ -36,9 +36,9 @@ class CustomTextWatcher(edList: Array<TextInputEditText>, bttn: Button) : TextWa
             )
             for (editText2 in edList) {
                 if (editText2.text.toString().trim { it <= ' ' }.isEmpty()) {
-                    button1.isEnabled = false
+                    btnSetData.isEnabled = false
                     break
-                } else button1.isEnabled = true
+                } else btnSetData.isEnabled = true
             }
         }
     }
