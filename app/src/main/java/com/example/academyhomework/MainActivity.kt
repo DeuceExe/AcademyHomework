@@ -22,12 +22,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val dataList = mutableListOf<DataList>()
-        val sentList = mutableListOf<DataList>()
 
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.layoutManager = layoutManager
         val fieldsAdapter = ListAdapter(dataList) {
-            sentList.addAll(dataList)
             dataList.removeAt(it)
             dataList
         }
@@ -57,13 +55,7 @@ class MainActivity : AppCompatActivity() {
                         editBirthday.text.toString()
                     )
                 )
-                fieldsAdapter.notifyDataSetChanged()
-
-                editName.text?.clear()
-                editSurname.text?.clear()
-                editPhone.text?.clear()
-                editAge.text?.clear()
-                editBirthday.text?.clear()
+                clearFields()
                 btnSecondActivity.isEnabled = true
             }
             editBirthday.setOnClickListener {
@@ -124,8 +116,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun clearFields() {
+        with(binding) {
+            editName.text?.clear()
+            editSurname.text?.clear()
+            editPhone.text?.clear()
+            editAge.text?.clear()
+            editBirthday.text?.clear()
+        }
+    }
+
     companion object {
 
+        const val FILENAME = "UserInfo"
         const val DATA = "Data"
     }
 }
