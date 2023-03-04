@@ -13,4 +13,12 @@
     <string name="second_activity">Second Activity</string>
     <string name="tvPhone">+%1$s</string>
     <string name="tvAge">%s years</string>
+    <string name="do_something">Do something</string>
+    <string name="settings">Settings</string>
+    <string name="users">Users</string>
+    <string name="information">Information</string>
+    <string name="nv_settings">Nothing to configure</string>
+    <string name="nv_users">Under development</string>
+    <string name="nv_information">¯|_(- .-)_/¯</string>
+    <string name="menu">Menu</string>
 </resources>

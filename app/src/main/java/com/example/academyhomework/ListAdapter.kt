@@ -3,6 +3,7 @@ package com.example.academyhomework
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.academyhomework.databinding.ItemListAdapterBinding
 
 class ListAdapter(
@@ -47,6 +48,10 @@ class ListAdapter(
                 tvPhone.text = "+${item.phone}"
                 tvAge.text = "${item.age} years"
                 tvBirthday.text = item.birthday
+                Glide
+                    .with(itemView)
+                    .load(item.imageId)
+                    .into(imagePerson)
             }
         }
     }

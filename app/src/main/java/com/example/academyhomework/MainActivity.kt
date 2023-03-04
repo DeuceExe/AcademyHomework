@@ -2,6 +2,7 @@ package com.example.academyhomework
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academyhomework.databinding.ActivityMainBinding
@@ -73,6 +74,27 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, SecondActivity::class.java)
                 intent.putExtra(DATA, dataList as Serializable)
                 startActivity(intent)
+            }
+
+            nvMenu.setNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.users -> Toast.makeText(
+                        this@MainActivity,
+                        R.string.nv_users,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    R.id.setting -> Toast.makeText(
+                        this@MainActivity,
+                        R.string.nv_settings,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    else -> Toast.makeText(
+                        this@MainActivity,
+                        R.string.nv_information,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                true
             }
         }
     }

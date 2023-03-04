@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="">
+        <menu>
+            <item
+                android:title="@string/users"
+                android:id="@+id/users" />
+            <item
+                android:title="@string/settings"
+                android:id="@+id/setting" />
+            <item
+                android:title="@string/information"
+                android:id="@+id/information" />
+        </menu>
+    </item>
+</menu>
