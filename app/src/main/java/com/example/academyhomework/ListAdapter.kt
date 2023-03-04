@@ -47,37 +47,6 @@ class ListAdapter(
                 tvPhone.text = "+${item.phone}"
                 tvAge.text = "${item.age} years"
                 tvBirthday.text = item.birthday
-
-                /*fun createPalette(bitmap: Bitmap) = run {
-                    fun createPalette(bitmap: Bitmap): Palette = Palette.from(bitmap).generate()
-                    GlideApp.with(Activity())
-                        .asBitmap()
-                        .load(imagePerson)
-                        .listener(object : RequestListener<Bitmap> {
-                            override fun onLoadFailed(
-                                e: GlideException?,
-                                model: Any?,
-                                target: Target<Bitmap>?,
-                                isFirstResource: Boolean
-                            ): Boolean {
-                                return false
-                            }
-
-                            override fun onResourceReady(
-                                resource: Bitmap?,
-                                model: Any?,
-                                target: Target<Bitmap>?,
-                                dataSource: DataSource?,
-                                isFirstResource: Boolean
-                            ): Boolean {
-                                if (resource != null) {
-                                    val palette: Palette = Palette.from(resource).generate()
-                                    var color = palette.darkMutedSwatch?.rgb ?: R.color.white
-                                }
-                                return false
-                            }
-                        }).into(binding.imagePerson)
-                }*/
             }
         }
     }
