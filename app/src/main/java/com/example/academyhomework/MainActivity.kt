@@ -1,5 +1,6 @@
 package com.example.academyhomework
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -47,23 +48,26 @@ class MainActivity : AppCompatActivity() {
             for (editText in fieldList) editText.addTextChangedListener(textWatcher)
 
             btnSetData.setOnClickListener {
-                dataList.add(
-                    DataList(
-                        setImage(editAge.text.toString().toInt()),
-                        editName.text.toString(),
-                        editSurname.text.toString(),
-                        editPhone.text.toString(),
-                        editAge.text.toString().toInt(),
-                        editBirthday.text.toString()
-                    )
-                )
+                this@MainActivity.openFileOutput(FILENAME, Context.MODE_PRIVATE).use {
+                    it.write(editName.text.toString().toByteArray())
+                    it.write(editSurname.text.toString().toByteArray())
+                    it.write(editPhone.text.toString().toByteArray())
+                    it.write(editAge.text.toString().toByteArray())
+                    it.write(editBirthday.text.toString().toByteArray())
+                }
+                /* dataList.add(
+                     DataList(
+                         setImage(editAge.text.toString().toInt()),
+                         editName.text.toString(),
+                         editSurname.text.toString(),
+                         editPhone.text.toString(),
+                         editAge.text.toString().toInt(),
+                         editBirthday.text.toString()
+                     )
+                 )*/
                 fieldsAdapter.notifyDataSetChanged()
 
-                editName.text?.clear()
-                editSurname.text?.clear()
-                editPhone.text?.clear()
-                editAge.text?.clear()
-                editBirthday.text?.clear()
+                clearFields()
                 btnSecondActivity.isEnabled = true
             }
             editBirthday.setOnClickListener {
@@ -124,8 +128,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun clearFields() {
+        with(binding) {
+            editName.text?.clear()
+            editSurname.text?.clear()
+            editPhone.text?.clear()
+            editAge.text?.clear()
+            editBirthday.text?.clear()
+        }
+    }
+
     companion object {
 
+        const val FILENAME = "UserInfo"
         const val DATA = "Data"
     }
 }
