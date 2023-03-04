@@ -22,12 +22,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val dataList = mutableListOf<DataList>()
-        val sentList = mutableListOf<DataList>()
 
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.layoutManager = layoutManager
         val fieldsAdapter = ListAdapter(dataList) {
-            sentList.addAll(dataList)
             dataList.removeAt(it)
             dataList
         }
@@ -58,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
                 fieldsAdapter.notifyDataSetChanged()
-                // clearFields()
+                clearFields()
                 btnSecondActivity.isEnabled = true
             }
             editBirthday.setOnClickListener {
