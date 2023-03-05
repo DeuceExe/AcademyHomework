@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academyhomework.databinding.ActivityMainBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.datepicker.MaterialDatePicker.INPUT_MODE_TEXT
 import com.google.android.material.textfield.TextInputEditText
+import java.io.IOException
 import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
@@ -19,31 +21,41 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val dataList = mutableListOf<DataList>()
+    private lateinit var fieldsAdapter: ListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        isFileExist()
+
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.layoutManager = layoutManager
-        val fieldsAdapter = ListAdapter(dataList) {
+        fieldsAdapter = ListAdapter(dataList) {
             dataList.removeAt(it)
+            binding.root.context.openFileOutput(FILENAME, Context.MODE_PRIVATE).use { file ->
+                repeat(dataList.size) { index ->
+                    file.write(dataList[index].name.plus("\n").toByteArray())
+                    file.write(dataList[index].surname.plus("\n").toByteArray())
+                    file.write(dataList[index].phone.plus("\n").toByteArray())
+                    file.write(dataList[index].age.toString().plus("\n").toByteArray())
+                    file.write(dataList[index].birthday.plus("\n").toByteArray())
+                }
+            }
             dataList
         }
         binding.recyclerView.adapter = fieldsAdapter
 
-        returnUserList()
+        setClickListeners(fieldsAdapter)
+    }
 
+    private fun setClickListeners(fieldsAdapter: ListAdapter) {
         with(binding) {
-
             setTextWatcher()
-
             btnSetData.setOnClickListener {
-
                 writeToFile()
-                readFromFile()
-
+                returnUserList()
                 fieldsAdapter.notifyDataSetChanged()
                 clearFields()
                 btnSecondActivity.isEnabled = true
@@ -75,14 +87,40 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun isFileExist() {
+        try {
+            if (binding.root.context.openFileInput(FILENAME).bufferedReader().readText()
+                    .isNotEmpty()
+            ) {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Файл существует")
+                builder.setMessage("Очистить или использовать?")
+                builder.setPositiveButton(R.string.dialog_positive_button) { dialog, _ ->
+                    returnUserList()
+                    dialog.dismiss()
+                }
+                builder.setNegativeButton(R.string.dialog_negative_button) { dialog, _ ->
+                    binding.root.context.openFileOutput(FILENAME, Context.MODE_PRIVATE).use {
+                        it.write("".toByteArray())
+                    }
+                    dialog.dismiss()
+                }
+                builder.show()
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
     private fun writeToFile() {
         var result = ""
-        this.openFileInput(FILENAME).bufferedReader().useLines { lines ->
+
+        binding.root.context.openFileInput(FILENAME).bufferedReader().useLines { lines ->
             lines.forEach {
                 result += "$it\n"
             }
         }
-        this@MainActivity.openFileOutput(FILENAME, Context.MODE_PRIVATE).use {
+        binding.root.context.openFileOutput(FILENAME, Context.MODE_PRIVATE).use {
             it.write(result.toByteArray())
             it.write(getStringToFileOutput(binding.editName))
             it.write(getStringToFileOutput(binding.editSurname))
@@ -93,33 +131,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun returnUserList() {
-        val fileDataList = mutableListOf<String>()
-        this@MainActivity.openFileInput(FILENAME).bufferedReader().useLines { lines ->
+        dataList.clear()
+        val currentUserData = mutableListOf<String>()
+        binding.root.context.openFileInput(FILENAME).bufferedReader().useLines { lines ->
             lines.forEach {
-                fileDataList.add(it)
+                currentUserData.add(it)
             }
-            /*dataList.add(
-                DataList(
-                    fileDataList[]
+            currentUserData.chunked(5) {
+                dataList.add(
+                    DataList(
+                        name = it[0],
+                        surname = it[1],
+                        phone = it[2],
+                        age = it[3].toInt(),
+                        imageId = setImage(it[3].toInt()),
+                        birthday = it[4]
+                    )
                 )
-            )*/
+            }
         }
-    }
-
-    private fun readFromFile() {
-        val fileDataList = mutableListOf<String>()
-        this@MainActivity.openFileInput(FILENAME).bufferedReader()
-            .useLines { it.forEach { fileDataList.addAll(listOf(it)) } }
-        dataList.add(
-            DataList(
-                name = fileDataList[0],
-                surname = fileDataList[1],
-                phone = fileDataList[2],
-                imageId = setImage(fileDataList[3].toInt()),
-                age = fileDataList[3].toInt(),
-                birthday = fileDataList[4]
-            )
-        )
+        fieldsAdapter.notifyDataSetChanged()
     }
 
     private fun getStringToFileOutput(text: TextInputEditText) =
