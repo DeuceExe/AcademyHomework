@@ -21,6 +21,8 @@
     <string name="nv_users">Under development</string>
     <string name="nv_information">¯|_(- .-)_/¯</string>
     <string name="menu">Menu</string>
-    <string name="dialog_positive_button">Использовать</string>
-    <string name="dialog_negative_button">Очистить</string>
+    <string name="dialog_positive_button">Restore</string>
+    <string name="dialog_negative_button">Clear</string>
+    <string name="dialog_title">Restore previously entered data?</string>
+    <string name="dialog_message">Clear or Restore?</string>
 </resources>
