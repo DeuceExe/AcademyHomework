@@ -2,9 +2,10 @@ package com.example.academyhomework
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -23,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
     private val dataList = mutableListOf<DataList>()
     private lateinit var fieldsAdapter: ListAdapter
-    private val externalState = Environment.getExternalStorageState()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         isFileExist()
+        saveImage()
 
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.layoutManager = layoutManager
@@ -52,35 +53,52 @@ class MainActivity : AppCompatActivity() {
         setClickListeners(fieldsAdapter)
     }
 
-    override fun onStop() {
-        super.onStop()
-        val file = File.createTempFile(TEMP_FILE, null, this.externalCacheDir)
-        BufferedWriter(FileWriter(file)).use {
-            it.write(binding.editName.text.toString())
-            it.write(binding.editSurname.text.toString())
-            it.write(binding.editPhone.text.toString())
-            it.write(binding.editAge.text.toString())
-            it.write(binding.editBirthday.text.toString())
+    override fun onStart() {
+        super.onStart()
+        val tempData = mutableListOf<String>()
+        try {
+            if (cacheDir.list().isNotEmpty()) {
+                val tempFiles = this.cacheDir.listFiles()
+                val file = File(this.cacheDir, tempFiles[0].name)
+                file.bufferedReader().useLines { lines ->
+                    lines.forEach {
+                        tempData.add(it)
+                    }
+                    tempData.chunked(5) {
+                        with(binding) {
+                            editName.setText(it[0])
+                            editSurname.setText(it[1])
+                            editPhone.setText(it[2])
+                            editAge.setText(it[3])
+                            editBirthday.setText(it[4])
+                        }
+                    }
+                }
+                tempFiles[0].delete()
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
+    override fun onStop() {
+        super.onStop()
+        File.createTempFile(TEMP_FILE, null, this.cacheDir)
+        val tempFiles = this.cacheDir.listFiles()
+        val file = File(this.cacheDir, tempFiles[0].name)
 
-        Log.d("restore", "TempFile")
-        if (externalState == Environment.MEDIA_MOUNTED) {
-            val currentUserData = mutableListOf<String>()
-            FileInputStream(TEMP_FILE).bufferedReader().useLines { lines ->
-                lines.forEach {
-                    currentUserData.add(it)
-                }
+        val fileWrite = FileWriter(file.absoluteFile)
+        val bufferedWriter = BufferedWriter(fileWrite)
 
-                currentUserData.chunked(5) {
-                    binding.editName.setText(it[0])
-                    binding.editSurname.setText(it[1])
-                    binding.editPhone.setText(it[2])
-                    binding.editAge.setText(it[3])
-                    binding.editBirthday.setText(it[4])
+        if (cacheDir.list().isNotEmpty()) {
+            with(binding) {
+                if (!editName.text.isNullOrEmpty() || !editSurname.text.isNullOrEmpty() || !editPhone.text.isNullOrEmpty() || !editAge.text.isNullOrEmpty() || !editBirthday.text.isNullOrEmpty()) {
+                    bufferedWriter.write(setTempData(editName))
+                    bufferedWriter.write(setTempData(editSurname))
+                    bufferedWriter.write(setTempData(editPhone))
+                    bufferedWriter.write(setTempData(editAge))
+                    bufferedWriter.write(setTempData(editBirthday))
+                    bufferedWriter.close()
                 }
             }
         }
@@ -153,9 +171,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 builder.setNegativeButton(R.string.dialog_negative_button) { dialog, _ ->
                     File(INTERNAL_PATH).delete()
-                    /*binding.root.context.openFileOutput(FILENAME, Context.MODE_PRIVATE).use {
-                        it.write("".toByteArray())
-                    }*/
                     dialog.dismiss()
                 }
                 builder.show()
@@ -185,6 +200,40 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun saveImage() {
+        val bitMapImage = BitmapFactory.decodeResource(resources, R.drawable.ic_elderly)
+        val bitMapImage2 = BitmapFactory.decodeResource(resources, R.drawable.ic_schoolboy)
+
+        val internalFile = File(INTERNAL_IMAGE_PATH, "elderly.png")
+        val externalFile = File(EXTERNAL_IMAGE_PATH, "schoolboy.png")
+
+        var out = FileOutputStream(internalFile)
+        try {
+            bitMapImage.compress(Bitmap.CompressFormat.PNG, 100, out)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        } finally {
+            try {
+                out.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        out = FileOutputStream(externalFile)
+        try {
+            bitMapImage2.compress(Bitmap.CompressFormat.PNG, 100, out)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        } finally {
+            try {
+                out.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
     private fun returnUserList() {
         dataList.clear()
         val currentUserData = mutableListOf<String>()
@@ -210,6 +259,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun getStringToFileOutput(text: TextInputEditText) =
         text.text.toString().plus("\n").toByteArray()
+
+    private fun setTempData(text: TextInputEditText) = text.text.toString().plus("\n")
 
     private fun setImage(age: Int): Int {
         val imageId: Int = when (age) {
@@ -262,5 +313,7 @@ class MainActivity : AppCompatActivity() {
         const val EXTERNAL_FILE = "ExternalFile"
         const val TEMP_FILE = "Temp"
         const val DATA = "Data"
+        const val INTERNAL_IMAGE_PATH = "/data/data/com.example.academyhomework/files"
+        const val EXTERNAL_IMAGE_PATH = "/sdcard/Android/data/com.example.academyhomework/files/"
     }
 }

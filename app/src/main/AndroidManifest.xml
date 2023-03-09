@@ -7,7 +7,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/kotlin_icon"
-        android:label="Homework 6"
+        android:label="Homework 7"
         android:roundIcon="@drawable/bug"
         android:supportsRtl="true"
         android:theme="@style/Theme.AcademyHomework"

@@ -2,10 +2,10 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
-
 apply plugin: 'kotlin-kapt'
 
 android {
+
     namespace 'com.example.academyhomework'
     compileSdk 33
 
