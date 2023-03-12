@@ -30,8 +30,8 @@ class SecondActivity : AppCompatActivity() {
                 binding.rv.layoutManager = layoutManager
             }
         }
-        val adapter = ListAdapter(newList) {
-            newList.removeAt(it)
+        val adapter = ListAdapter(newList) { _, position ->
+            newList.removeAt(position)
             newList
         }
         binding.rv.adapter = adapter

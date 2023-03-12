@@ -5,6 +5,7 @@ import java.io.Serializable
 
 @Entity
 data class DataList(
+    val itemId: Int,
     val imageId: Int,
     val name: String,
     val surname: String,

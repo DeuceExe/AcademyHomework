@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.academyhomework.DataBaseHelper.Companion.TABLE_NAME
 import com.example.academyhomework.databinding.ActivityMainBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.datepicker.MaterialDatePicker.INPUT_MODE_TEXT
@@ -31,13 +32,21 @@ class MainActivity : AppCompatActivity() {
 
         val dbHelper = DataBaseHelper(this)
         sqlDb = dbHelper.readableDatabase
-        cursor = sqlDb.rawQuery("SELECT * FROM ${DataBaseHelper.TABLE_NAME}", null)
+        cursor = sqlDb.rawQuery("SELECT * FROM $TABLE_NAME", null)
+
+        cursor.moveToFirst()
+        sqlDb.needUpgrade(1)
+        readDb()
 
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.layoutManager = layoutManager
 
-        fieldsAdapter = ListAdapter(dataList) {
-            dataList.removeAt(it)
+        fieldsAdapter = ListAdapter(dataList) { dbPosition, _ ->
+            val item = dataList.find { it.itemId == dbPosition }
+            dataList.remove(item)
+            with(DataBaseHelper) {
+                sqlDb.delete(TABLE_NAME, "$COLUMN_ID=$dbPosition", null)
+            }
             dataList
         }
         binding.recyclerView.adapter = fieldsAdapter
@@ -45,9 +54,39 @@ class MainActivity : AppCompatActivity() {
         setClickListeners(fieldsAdapter)
     }
 
+    private fun readDb() {
+        val dbList = mutableListOf<String>()
+        val column = cursor.columnNames
+        cursor.moveToFirst()
+        if (cursor.move(0)) {
+            do {
+                for (name in column) {
+                    val columnIndex = cursor.getColumnIndex(name)
+                    dbList.add(cursor.getString(columnIndex))
+                }
+            } while (cursor.moveToNext())
+
+            dbList.chunked(6) {
+                dataList.add(
+                    DataList(
+                        itemId = it[0].toInt(),
+                        name = it[1],
+                        surname = it[2],
+                        phone = it[3],
+                        age = it[4].toInt(),
+                        imageId = setImage(it[4].toInt()),
+                        birthday = it[5]
+                    )
+                )
+            }
+            dbList.clear()
+        }
+    }
+
     private fun setClickListeners(fieldsAdapter: ListAdapter) {
         with(binding) {
             setTextWatcher()
+            val dbList = mutableListOf<String>()
 
             btnSetData.setOnClickListener {
                 val cv = ContentValues()
@@ -56,21 +95,21 @@ class MainActivity : AppCompatActivity() {
                         !editPhone.text.isNullOrEmpty() && !editAge.text.isNullOrEmpty() &&
                         !editBirthday.text.isNullOrEmpty()
                     ) {
-                        cv.put(DataBaseHelper.COLUMN_NAME, editName.text.toString())
-                        cv.put(DataBaseHelper.COLUMN_LASTNAME, editSurname.text.toString())
-                        cv.put(DataBaseHelper.COLUMN_PHONE, editPhone.text.toString())
-                        cv.put(DataBaseHelper.COLUMN_AGE, editAge.text.toString().toInt())
-                        cv.put(DataBaseHelper.COLUMN_BIRTHDAY, editBirthday.text.toString())
-                        sqlDb.insert(DataBaseHelper.TABLE_NAME, null, cv)
+                        with(DataBaseHelper) {
+                            cv.put(COLUMN_NAME, editName.text.toString())
+                            cv.put(COLUMN_LASTNAME, editSurname.text.toString())
+                            cv.put(COLUMN_PHONE, editPhone.text.toString())
+                            cv.put(COLUMN_AGE, editAge.text.toString().toInt())
+                            cv.put(COLUMN_BIRTHDAY, editBirthday.text.toString())
+                            sqlDb.insert(TABLE_NAME, null, cv)
+                        }
                     }
                 }
-                // dataList.add(
-                //   DataList(
-                //       setImage(cursor.columnNames)
-                //   )
-                // )
+
+                cursor.moveToLast()
                 fieldsAdapter.notifyDataSetChanged()
-                clearFields()
+                //   clearFields()
+                dbList.clear()
                 btnSecondActivity.isEnabled = true
             }
             editBirthday.setOnClickListener {

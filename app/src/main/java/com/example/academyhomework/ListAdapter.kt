@@ -11,7 +11,7 @@ import com.example.academyhomework.databinding.ItemListAdapterBinding
 
 class ListAdapter(
     private var dataSet: MutableList<DataList>,
-    private val clickAction: (Int) -> MutableList<DataList>,
+    private val clickAction: (Int, Int) -> MutableList<DataList>,
 
     ) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
@@ -20,29 +20,26 @@ class ListAdapter(
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(viewGroup.context)
         binding = ItemListAdapterBinding.inflate(inflater, viewGroup, false)
-        return ViewHolder(binding, viewGroup.context)
+        return ViewHolder(binding, viewGroup.context, clickAction)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.bind(dataSet[position])
-
-        binding.btnDeleteItem.setOnClickListener {
-            updateList(clickAction.invoke(position))
-        }
+        viewHolder.bind(dataSet[position], position)
     }
 
-    private fun updateList(newList: MutableList<DataList>) {
+    fun updateList(newList: MutableList<DataList>) {
         this.dataSet = newList
         notifyDataSetChanged()
     }
 
     override fun getItemCount() = dataSet.size
 
-    class ViewHolder(
-        private val binding: ItemListAdapterBinding, private val context: Context
+    inner class ViewHolder(
+        private val binding: ItemListAdapterBinding, private val context: Context,
+        private val clickAction: (Int, Int) -> MutableList<DataList>
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: DataList) {
+        fun bind(item: DataList, position: Int) {
             with(binding) {
                 when (item.imageId) {
                     0 -> {
@@ -70,12 +67,21 @@ class ListAdapter(
                         createPalette(bitmap1, binding)
                     }
                 }
+
                 imagePerson.setImageResource(item.imageId)
                 tvName.text = item.name
                 tvSurname.text = item.surname
                 tvPhone.text = "+${item.phone}"
                 tvAge.text = "${item.age} years"
                 tvBirthday.text = item.birthday
+            }
+
+            binding.btnDeleteItem.setOnClickListener {
+                updateList(
+                    (clickAction.invoke(
+                        item.itemId, position
+                    ))
+                )
             }
         }
 
