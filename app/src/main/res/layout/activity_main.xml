@@ -120,16 +120,42 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layoutBirthday" />
 
+        <Button
+            android:id="@+id/btnSortByName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/by_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnSetData"
+            android:layout_marginStart="15dp" />
+
+        <Button
+            android:id="@+id/btnSortByAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/by_age"
+            app:layout_constraintStart_toEndOf="@id/btnSortByName"
+            app:layout_constraintTop_toBottomOf="@id/btnSetData"
+            android:layout_marginStart="5dp" />
+
+        <Button
+            android:id="@+id/btnFirstFive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/first_5_elements"
+            app:layout_constraintStart_toEndOf="@id/btnSortByAge"
+            app:layout_constraintTop_toBottomOf="@id/btnSecondActivity"
+            android:layout_marginStart="8dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="275dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnSetData" />
+            app:layout_constraintTop_toBottomOf="@id/btnSortByName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

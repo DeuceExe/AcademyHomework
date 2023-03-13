@@ -105,10 +105,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-
-                cursor.moveToLast()
-                fieldsAdapter.notifyDataSetChanged()
-                //   clearFields()
+                clearFields()
                 dbList.clear()
                 btnSecondActivity.isEnabled = true
             }
@@ -137,6 +134,76 @@ class MainActivity : AppCompatActivity() {
                 }
                 true
             }
+
+            binding.btnSortByName.setOnClickListener {
+                dataList.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
+                fieldsAdapter.notifyDataSetChanged()
+            }
+
+            binding.btnSortByAge.setOnClickListener {
+                dataList.sortBy { it.age }
+                fieldsAdapter.notifyDataSetChanged()
+            }
+
+            binding.btnFirstFive.setOnClickListener {
+                showFirstFive()
+            }
+        }
+    }
+
+    private fun showFirstFive() {
+        dataList.clear()
+        fieldsAdapter.notifyDataSetChanged()
+        val fiveList = mutableListOf<String>()
+        val column = cursor.columnNames
+        cursor.moveToFirst()
+        for (n in 1..5) {
+            for (name in column) {
+                val columnIndex = cursor.getColumnIndex(name)
+                fiveList.add(cursor.getString(columnIndex))
+            }
+            cursor.moveToNext()
+        }
+        fiveList.chunked(6) {
+            dataList.add(
+                DataList(
+                    itemId = it[0].toInt(),
+                    name = it[1],
+                    surname = it[2],
+                    phone = it[3],
+                    age = it[4].toInt(),
+                    imageId = setImage(it[4].toInt()),
+                    birthday = it[5]
+                )
+            )
+        }
+    }
+
+    private fun refreshRecycler() {
+        dataList.clear()
+        fieldsAdapter.notifyDataSetChanged()
+        val newDataList = mutableListOf<String>()
+        val column = cursor.columnNames
+        cursor.moveToFirst()
+        do {
+            for (name in column) {
+                val columnIndex = cursor.getColumnIndex(name)
+                newDataList.add(cursor.getString(columnIndex))
+            }
+        } while (cursor.moveToNext())
+
+        newDataList.chunked(6) {
+            dataList.add(
+                DataList(
+                    itemId = it[0].toInt(),
+                    name = it[1],
+                    surname = it[2],
+                    phone = it[3],
+                    age = it[4].toInt(),
+                    imageId = setImage(it[4].toInt()),
+                    birthday = it[5]
+                )
+            )
         }
     }
 

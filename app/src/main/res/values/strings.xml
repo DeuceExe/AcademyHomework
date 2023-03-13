@@ -21,4 +21,7 @@
     <string name="nv_users">Under development</string>
     <string name="nv_information">¯|_(- .-)_/¯</string>
     <string name="menu">Menu</string>
+    <string name="by_name">by Name</string>
+    <string name="by_age">by Age</string>
+    <string name="first_5_elements">first 5 elements</string>
 </resources>
